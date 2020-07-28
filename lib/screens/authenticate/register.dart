@@ -45,6 +45,10 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: const InputDecoration(
+                    icon: Icon(Icons.email),
+                    labelText: 'Your Email'
+                ),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
@@ -54,6 +58,10 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: const InputDecoration(
+                    icon: Icon(Icons.lock),
+                    labelText: 'Your Password'
+                ),
                 obscureText: true,
                 validator: (val) => val.length < 6 ? 'Enter a password at least 6 chars' : null,
                 onChanged: (val) {

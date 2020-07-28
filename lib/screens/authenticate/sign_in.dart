@@ -1,4 +1,3 @@
-import 'package:brew_crew/screens/authenticate/register.dart';
 import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +13,12 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   final AuthService auth = AuthService();
+  final formKey = GlobalKey<FormState>();
 
   // text field state
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +41,16 @@ class _SignInState extends State<SignIn> {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: formKey,
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: const InputDecoration(
+                  icon: Icon(Icons.email),
+                  labelText: 'Your email'
+                ),
+                validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
                     email = val;
@@ -52,6 +59,11 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: const InputDecoration(
+                    icon: Icon(Icons.lock),
+                    labelText: 'Your Password'
+                ),
+                validator: (val) => val.length < 6 ? 'Password Length Error' : null,
                 obscureText: true,
                 onChanged: (val) {
                   setState(() {
@@ -69,6 +81,14 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 onPressed: () async {
+                  if (formKey.currentState.validate()) {
+                    dynamic result = await auth.signInWithEmailAndPassword(email, password);
+                    if (result == null) {
+                      setState(() {
+                        error = 'error has occurred';
+                      });
+                    }
+                  }
                 },
               )
             ],
