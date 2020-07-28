@@ -35,6 +35,10 @@ class AuthService {
 
   // register with email & password
 
+  Future registerWithEmailAndPassword() async {
+
+  }
+
   // sign out of app
   Future signOut() async {
     try {
