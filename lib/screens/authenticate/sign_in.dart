@@ -2,16 +2,15 @@ import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
-
   final Function toggleView;
-  SignIn({ this.toggleView });
+
+  SignIn({this.toggleView});
 
   @override
   _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
-
   final AuthService auth = AuthService();
   final formKey = GlobalKey<FormState>();
 
@@ -47,9 +46,14 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: const InputDecoration(
-                  icon: Icon(Icons.email),
-                  labelText: 'Your email'
-                ),
+                    icon: Icon(Icons.email),
+                    labelText: 'Your Email',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.white, width: 2.0)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.white, width: 2.0))),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
@@ -61,9 +65,15 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 decoration: const InputDecoration(
                     icon: Icon(Icons.lock),
-                    labelText: 'Your Password'
-                ),
-                validator: (val) => val.length < 6 ? 'Password Length Error' : null,
+                    labelText: 'Your Password',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.white, width: 2.0)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.white, width: 2.0))),
+                validator: (val) =>
+                    val.length < 6 ? 'Password Length Error' : null,
                 obscureText: true,
                 onChanged: (val) {
                   setState(() {
@@ -76,13 +86,12 @@ class _SignInState extends State<SignIn> {
                 color: Colors.brown[400],
                 child: Text(
                   'Sign In',
-                  style: TextStyle(
-                    color: Colors.white
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
                   if (formKey.currentState.validate()) {
-                    dynamic result = await auth.signInWithEmailAndPassword(email, password);
+                    dynamic result =
+                        await auth.signInWithEmailAndPassword(email, password);
                     if (result == null) {
                       setState(() {
                         error = 'error has occurred';

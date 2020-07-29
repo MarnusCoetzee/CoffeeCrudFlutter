@@ -47,7 +47,13 @@ class _RegisterState extends State<Register> {
               TextFormField(
                 decoration: const InputDecoration(
                     icon: Icon(Icons.email),
-                    labelText: 'Your Email'
+                    labelText: 'Your Email',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Colors.white, width: 2.0)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Colors.white, width: 2.0)),
                 ),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
@@ -58,10 +64,6 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.lock),
-                    labelText: 'Your Password'
-                ),
                 obscureText: true,
                 validator: (val) => val.length < 6 ? 'Enter a password at least 6 chars' : null,
                 onChanged: (val) {
