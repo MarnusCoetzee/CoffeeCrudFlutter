@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 const textInputDecoration = const InputDecoration(
-  icon: Icon(Icons.lock),
   filled: true,
   fillColor: Colors.white,
   enabledBorder: OutlineInputBorder(
